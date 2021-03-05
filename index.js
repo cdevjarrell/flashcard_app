@@ -2,6 +2,7 @@ const connectDB = require("./startup/db");
 const express = require("express");
 const app = express();
 const flashcards = require("./routes/flashcards");
+const collections = require("./routes/collections");
 
 connectDB();
 
