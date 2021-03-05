@@ -5,3 +5,7 @@ const flashcardSchema = new mongoose.Schema({
   description: { type: String, required: true },
   dateModified: { type: Date, default: Date.now },
 });
+
+const Flashcard = mongoose.model("Flashcard", flashcardSchema);
+
+module.exports = Flashcard;
