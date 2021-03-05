@@ -71,4 +71,19 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  try {
+    const flashcard = await Flashcard.findByIdAndRemove(req.params.id);
+
+    if (!flashcard)
+      return res
+        .status(400)
+        .send(`The flashcard with the id "${req.params.id}" does not exist.`);
+
+    return res.send(flashcard);
+  } catch (ex) {
+    return res.status(500).send(`Internal Server Error: ${ex}`);
+  }
+});
+
 module.exports = router;
