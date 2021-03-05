@@ -44,4 +44,31 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  try {
+    const { error } = validate(req.body);
+    if (error) return res.status(400).send(error);
+
+    const flashcard = await Flashcard.findByIdAndUpdate(
+      req.params.id,
+      {
+        name: req.body.name,
+        description: req.body.description,
+      },
+      { new: true }
+    );
+
+    if (!flashcard)
+      return res
+        .status(400)
+        .send(`The flashcard with id "${req.params.id}" does not exist.`);
+
+    await flashcard.save();
+
+    return res.send(flashcard);
+  } catch (ex) {
+    return res.status(500).send(`Internal Server Error: ${ex}`);
+  }
+});
+
 module.exports = router;
