@@ -5,9 +5,8 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   try {
     const flashcard = new Flashcard({
-      name: "Key of C",
-      description:
-        "The Key of C includes the notes 'C', 'D', 'E', 'F', 'G', 'A', and 'B'.",
+      name: req.body.name,
+      description:req.body.description,
     });
 
     await flashcard.save();
