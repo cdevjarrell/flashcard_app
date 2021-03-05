@@ -20,4 +20,13 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const flashcards = await Flashcard.find();
+    return res.send(flashcards);
+  } catch (ex) {
+    return res.status(500).send(`Internal Server Error: ${ex}`);
+  }
+});
+
 module.exports = router;
