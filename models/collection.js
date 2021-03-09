@@ -1,20 +1,12 @@
 const mongoose = require("mongoose");
-const Joi = require("joi");
-const { flashcardSchema } = require("flashcard");
+const flashCard = require("./Card");
 
 const collectionSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  collectionStack: { type: [flashcardSchema], default: [] },
+  collectionStack: [flashCard.schema],
 });
 
-const Collection = mongoose.model("Collection", collectionSchema);
 
-function validateCollection(collection) {
-  const schema = Joi.object({
-    name: Joi.string().require(),
-  });
-  return schema.validate(collection);
-}
 
-exports.Collection = Collection;
-exports.validate = validateCollection;
+
+module.exports = mongoose.model('Collection', collectionSchema)

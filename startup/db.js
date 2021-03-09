@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 const config = require("config");
+const db = config.get("mongoURI");
 
 function connectDB() {
   mongoose
-    .connect(config.get("mongoURI"), {
+    .connect(db, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
